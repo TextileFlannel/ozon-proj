@@ -1,0 +1,38 @@
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  commentsAllowed: Boolean!
+  createdAt: String!
+  comments: [Comment!]!
+}
+
+type Comment {
+  id: ID!
+  postID: ID!
+  parentID: ID
+  content: String!
+  createdAt: String!
+}
+
+input NewPost {
+  title: String!
+  content: String!
+  commentsAllowed: Boolean!
+}
+
+input NewComment {
+  postID: ID!
+  parentID: ID
+  content: String!
+}
+
+type Query {
+  posts: [Post!]!
+  post(id: ID!): Post
+}
+
+type Mutation {
+  createPost(input: NewPost!): Post!
+  createComment(input: NewComment!): Comment!
+}
